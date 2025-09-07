@@ -20,6 +20,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters += listOf("arm64-v8a")  // ✅ Kotlin DSL 방식
+        }
+        packaging {
+            jniLibs {
+                useLegacyPackaging = true  // ✅ 반드시 '=' 사용
+            }
+        }
     }
 
     buildTypes {
@@ -58,6 +67,8 @@ dependencies {
     implementation("io.objectbox:objectbox-android:3.7.1") // 최신 안정 버전
 
     implementation("com.google.mediapipe:tasks-text:latest.release")
+    implementation("com.google.mediapipe:tasks-core:0.10.14")
+    implementation("com.google.mediapipe:tasks-text:0.10.14")
 
     implementation("com.orhanobut:logger:2.2.0")
     val composeBom = platform("androidx.compose:compose-bom:2024.06.00")
